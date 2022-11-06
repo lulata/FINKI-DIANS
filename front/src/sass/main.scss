@@ -37,6 +37,10 @@ body {
     margin-bottom: 5px;
     text-align: center;
     color: #000;
+    &.table-title{
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
   }
   .home-page-subtitle {
     font-size: 15px;
@@ -84,6 +88,11 @@ body {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
+    &.selected-properties{
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
     thead {
       tr {
         th {

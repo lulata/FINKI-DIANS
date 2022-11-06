@@ -74,16 +74,38 @@
       style="width: 100%; height: 500px"
     ></div>
 
-    <h1 class="home-page-title">Table data preview</h1>
+    <h1 class="home-page-title table-title">Table data preview</h1>
 
-    <table>
+    <table
+      :class="{
+        'selected-properties': selectedFilters.includes('withProperties'),
+      }"
+    >
       <thead>
         <tr>
           <th v-if="bankHasData('openstreetmap_url')">Openstreetmap_url</th>
           <th v-if="bankHasData('longitude')">Longitude</th>
           <th v-if="bankHasData('latitude')">Latitude</th>
+
           <th v-if="bankHasData('properties')">Name</th>
+          <th v-if="bankHasData('properties')">Name EN</th>
           <th v-if="bankHasData('properties')">Amenity</th>
+          <th v-if="bankHasData('properties')">Addr city</th>
+          <th v-if="bankHasData('properties')">Addr city en</th>
+          <th v-if="bankHasData('properties')">Addr country</th>
+          <th v-if="bankHasData('properties')">Addr house number</th>
+          <th v-if="bankHasData('properties')">Addr postcode</th>
+          <th v-if="bankHasData('properties')">Addr street</th>
+          <th v-if="bankHasData('properties')">ATM</th>
+          <th v-if="bankHasData('properties')">Building</th>
+          <th v-if="bankHasData('properties')">Int name</th>
+          <th v-if="bankHasData('properties')">Building lvls</th>
+          <th v-if="bankHasData('properties')">office</th>
+          <th v-if="bankHasData('properties')">Opening hours</th>
+          <th v-if="bankHasData('properties')">Operator</th>
+          <th v-if="bankHasData('properties')">Surveillance</th>
+          <th v-if="bankHasData('properties')">Surveillance type</th>
+          <th v-if="bankHasData('properties')">Contact website</th>
         </tr>
       </thead>
       <tbody>
@@ -97,15 +119,135 @@
 
           <td v-if="bankHasData('properties')">
             {{
-              bank.properties && bank.properties.name
-                ? bank.properties.name
+              bank.properties && bank.properties["name"]
+                ? bank.properties["name"]
                 : "/"
             }}
           </td>
           <td v-if="bankHasData('properties')">
             {{
-              bank.properties && bank.properties.amenity
-                ? bank.properties.amenity
+              bank.properties && bank.properties["name:en"]
+                ? bank.properties["name:en"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["amenity"]
+                ? bank.properties["amenity"]
+                : "/"
+            }}
+          </td>
+
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["addr:city"]
+                ? bank.properties["addr:city"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["addr:city:en"]
+                ? bank.properties["addr:city:en"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["addr:country"]
+                ? bank.properties["addr:country"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["addr:housenumber"]
+                ? bank.properties["addr:housenumber"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["addr:postcode"]
+                ? bank.properties["addr:postcode"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["addr:street"]
+                ? bank.properties["addr:street"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["atm"]
+                ? bank.properties["atm"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["building"]
+                ? bank.properties["building"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["int_name"]
+                ? bank.properties["int_name"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["building:levels"]
+                ? bank.properties["building:levels"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["office"]
+                ? bank.properties["office"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["opening_hours"]
+                ? bank.properties["opening_hours"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["operator"]
+                ? bank.properties["operator"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["surveillance"]
+                ? bank.properties["surveillance"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["surveillance:type"]
+                ? bank.properties["surveillance:type"]
+                : "/"
+            }}
+          </td>
+          <td v-if="bankHasData('properties')">
+            {{
+              bank.properties && bank.properties["contact:website"]
+                ? bank.properties["contact:website"]
                 : "/"
             }}
           </td>
@@ -135,6 +277,23 @@ type Bank = {
   properties: {
     name: string;
     amenity: string;
+    "addr:city": string;
+    "addr:city:en": string;
+    "addr:country": string;
+    "addr:housenumber": string;
+    "addr:postcode": string;
+    "addr:street": string;
+    atm: string;
+    building: string;
+    "building:levels": string;
+    int_name: string;
+    "name:en": string;
+    office: string;
+    opening_hours: string;
+    operator: string;
+    surveillance: string;
+    "surveillance:type": string;
+    "contact:website": string;
   };
 };
 onMounted(() => {
@@ -155,14 +314,17 @@ onMounted(() => {
         "data:image/png;base64,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",
     });
     bankData.value.forEach((bank) => {
-      // console.log(bank);
       console.log(bank.longitude, bank.latitude);
 
       L.marker([parseInt(bank.longitude), parseInt(bank.latitude)], {
         icon: bankIcon,
       })
         .addTo(map)
-        .bindPopup(bank.openstreetmap_url);
+        .bindPopup(
+          bank.properties && bank.properties.name
+            ? bank.properties.name
+            : " " + " " + bank.openstreetmap_url
+        );
     });
 
     // L.circle([parseInt(bank.longitude), parseInt(bank.latitude)], {
@@ -224,13 +386,6 @@ function filterData(filterBy: string) {
 
 function bankHasData(check: string) {
   return bankData.value.some((bank) => {
-    if (check == "properties") {
-      return (
-        bank.properties &&
-        bank.properties.name !== null &&
-        bank.properties.amenity !== null
-      );
-    }
     return bank[check as keyof Bank];
   });
 }
