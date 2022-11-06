@@ -5,7 +5,7 @@ module.exports = defineConfig({
     proxy: {
       "^/api": {
         pathRewrite: { "^/api": "/api" },
-        target: "https://dians.sellora.ddcode.co/",
+        target: "https://dians.ddcode.co/",
         changeOrigin: true,
       },
     },

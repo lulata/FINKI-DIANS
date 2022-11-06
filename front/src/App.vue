@@ -2,4 +2,11 @@
   <router-view />
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+@import "@/sass/main.scss";
+#app {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+</style>
