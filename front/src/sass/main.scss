@@ -7,6 +7,8 @@
   letter-spacing: 0.03em;
   font-family: "Montserrat", sans-serif;
 }
+$blackColor: #000;
+$whiteColor: #fff;
 html {
   width: 100%;
   height: 100%;
@@ -36,8 +38,8 @@ body {
     font-weight: 600;
     margin-bottom: 5px;
     text-align: center;
-    color: #000;
-    &.table-title{
+    color: $blackColor;
+    &.table-title {
       margin-top: 20px;
       margin-bottom: 20px;
     }
@@ -48,7 +50,7 @@ body {
     font-weight: 400;
     margin-bottom: 20px;
     text-align: center;
-    color: #000;
+    color: $blackColor;
   }
   .home-page-buttons {
     display: flex;
@@ -63,23 +65,23 @@ body {
       justify-content: center;
       align-items: center;
       padding: 0.65rem 1.5rem;
-      border: 1px solid #000;
+      border: 1px solid $blackColor;
       border-radius: 4px;
       font-weight: 600;
       font-size: 16px;
       line-height: 130%;
-      background-color: #fff;
+      background-color: $whiteColor;
       transition: all 0.3s ease;
 
       &:hover {
         cursor: pointer;
-        background-color: #000;
-        color: #fff;
+        background-color: $blackColor;
+        color: $whiteColor;
         transform: scale(1.05);
       }
       &.selected-option {
-        background-color: #000;
-        color: #fff;
+        background-color: $blackColor;
+        color: $whiteColor;
       }
     }
   }
@@ -88,7 +90,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
-    &.selected-properties{
+    &.selected-properties {
       display: block;
       overflow-x: auto;
       white-space: nowrap;
@@ -96,21 +98,21 @@ body {
     thead {
       tr {
         th {
-          border: 1px solid #000;
+          border: 1px solid $blackColor;
           padding: 10px;
           font-weight: 600;
           font-size: 16px;
           line-height: 130%;
           text-align: center;
-          background-color: #000;
-          color: #fff;
+          background-color: $blackColor;
+          color: $whiteColor;
         }
       }
     }
     tbody {
       tr {
         td {
-          border: 1px solid #000;
+          border: 1px solid $blackColor;
           padding: 10px;
           font-weight: 400;
           font-size: 16px;
