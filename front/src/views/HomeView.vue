@@ -68,7 +68,7 @@
           'selected-option': selectedFilters.includes('sort'),
         }"
       >
-        Limit: {{ limit }}
+        Limit: {{ limit === 150 ? "All" : limit }}
       </div>
     </div>
     <div
@@ -86,7 +86,6 @@
     >
       <thead>
         <tr>
-          <th v-if="bankHasData('openstreetmap_url')">Openstreetmap_url</th>
           <th v-if="bankHasData('longitude')">Longitude</th>
           <th v-if="bankHasData('latitude')">Latitude</th>
 
@@ -113,16 +112,13 @@
       </thead>
       <tbody>
         <tr v-for="bank in bankData" :key="bank.id">
-          <td v-if="bankHasData('openstreetmap_url')">
-            {{ bank.openstreetmap_url ? bank.openstreetmap_url : "/" }}
+          <td>
+            {{ bank.name ? bank.name : "/" }}
           </td>
           <td>{{ bank.longitude ? bank.longitude : "/" }}</td>
 
           <td>{{ bank.latitude ? bank.latitude : "/" }}</td>
 
-          <td>
-            {{ bank.name ? bank.name : "/" }}
-          </td>
           <td v-if="bankHasData('properties')">
             {{
               bank.properties && bank.properties["name:en"]
@@ -317,10 +313,10 @@ function makeMap(update = false) {
     mapData.value = L.map("leafletmap").setView([41.99646, 21.43141], 13);
 
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution:
-      '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  }).addTo(mapData.value);
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(mapData.value);
   }
 
   const bankIcon = L.icon({
@@ -341,11 +337,7 @@ function makeMap(update = false) {
       icon: bankIcon,
     })
       .addTo(mapData.value)
-      .bindPopup(
-        bank.properties && bank.name
-          ? bank.name
-          : " " + " " + bank.openstreetmap_url
-      );
+      .bindPopup(bank.name ? bank.name : "Name not defined ");
     markers.value.push(marker);
     marker.addTo(mapData.value);
   });
@@ -361,7 +353,7 @@ function filterData(filterBy: string) {
       selectedFilters.value.push(filterBy);
     }
   } else if (filterBy === "limit") {
-    const limitOptions = [10, 25, 50, 100];
+    const limitOptions = [10, 25, 50, 100, 150];
     const index = limitOptions.indexOf(limit.value);
     if (index === limitOptions.length - 1) {
       limit.value = limitOptions[0];
