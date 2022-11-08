@@ -2130,6 +2130,7 @@ class FullLocationSeeder extends Seeder
          $node->latitude = $feature->geometry->coordinates[0];
          if(isset($feature->properties->name)) {
           $node->name = $feature->properties->name;
+          unset($feature->properties->name);
          }
          $node->save();
 
