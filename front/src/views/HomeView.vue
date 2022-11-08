@@ -86,11 +86,12 @@
     >
       <thead>
         <tr>
+          <th v-if="bankHasData('name')">Name</th>
+          <th v-if="bankHasData('properties')">Name EN</th>
+
           <th v-if="bankHasData('longitude')">Longitude</th>
           <th v-if="bankHasData('latitude')">Latitude</th>
 
-          <th v-if="bankHasData('name')">Name</th>
-          <th v-if="bankHasData('properties')">Name EN</th>
           <th v-if="bankHasData('properties')">Amenity</th>
           <th v-if="bankHasData('properties')">Addr city</th>
           <th v-if="bankHasData('properties')">Addr city en</th>
@@ -115,10 +116,6 @@
           <td>
             {{ bank.name ? bank.name : "/" }}
           </td>
-          <td>{{ bank.longitude ? bank.longitude : "/" }}</td>
-
-          <td>{{ bank.latitude ? bank.latitude : "/" }}</td>
-
           <td v-if="bankHasData('properties')">
             {{
               bank.properties && bank.properties["name:en"]
@@ -126,6 +123,10 @@
                 : "/"
             }}
           </td>
+          <td>{{ bank.longitude ? bank.longitude : "/" }}</td>
+
+          <td>{{ bank.latitude ? bank.latitude : "/" }}</td>
+
           <td v-if="bankHasData('properties')">
             {{
               bank.properties && bank.properties["amenity"]
@@ -303,7 +304,6 @@ onMounted(() => {
 
 function getData() {
   return axios.get(`/api/banks?limit=${limit.value}`).then((response) => {
-    console.log(response.data);
     bankData.value = response.data;
   });
 }
@@ -378,7 +378,6 @@ function filterData(filterBy: string) {
   return axios
     .get(`/api/banks?limit=${limit.value}&${filters}`)
     .then((response) => {
-      console.log(response.data);
       bankData.value = response.data;
       makeMap(true);
     });
