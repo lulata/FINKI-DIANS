@@ -59,7 +59,10 @@
           'selected-option': sort === 'asc' || sort === 'desc',
         }"
       >
-        Sort {{ sort == "asc" ? ": ASC" : sort == "desc" ? ": DESC" : "" }}
+        Sort
+        {{
+          sort == "asc" ? ": Ascending" : sort == "desc" ? ": Descending" : ""
+        }}
       </div>
       <div
         class="home-page-button"
@@ -113,7 +116,7 @@
       </thead>
       <tbody>
         <tr v-for="bank in bankData" :key="bank.id">
-          <td>
+          <td v-if="bankHasData('name')">
             {{ bank.name ? bank.name : "/" }}
           </td>
           <td v-if="bankHasData('properties')">
