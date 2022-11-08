@@ -2128,6 +2128,9 @@ class FullLocationSeeder extends Seeder
          $node->openstreetmap_url = $feature->id;
          $node->longitude = $feature->geometry->coordinates[1];
          $node->latitude = $feature->geometry->coordinates[0];
+         if(isset($feature->properties->name)) {
+          $node->name = $feature->properties->name;
+         }
          $node->save();
 
          foreach($feature->properties as $key => $value) {

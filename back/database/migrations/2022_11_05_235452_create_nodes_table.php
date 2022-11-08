@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('longitude');
             $table->string('latitude');
+            $table->string('name')->nullable();
             $table->string('openstreetmap_url');
             $table->timestamps();
         });

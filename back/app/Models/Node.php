@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Node extends Model
 {
     use HasFactory;
-    protected $visible = ['id', 'longitude', 'latitude', 'openstreetmap_url', 'properties'];
+    protected $visible = ['id', 'longitude', 'latitude', 'openstreetmap_url', 'properties', 'name'];
 
     public function properties()
     {
