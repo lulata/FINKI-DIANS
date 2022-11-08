@@ -6,6 +6,7 @@ module.exports = defineConfig({
       "^/api": {
         pathRewrite: { "^/api": "/api" },
         target: "https://dians.ddcode.co/",
+        // target: "http://127.0.0.1:8000",
         changeOrigin: true,
       },
     },
