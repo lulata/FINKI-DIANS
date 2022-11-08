@@ -90,7 +90,7 @@
           <th v-if="bankHasData('longitude')">Longitude</th>
           <th v-if="bankHasData('latitude')">Latitude</th>
 
-          <th v-if="bankHasData('properties')">Name</th>
+          <th v-if="bankHasData('name')">Name</th>
           <th v-if="bankHasData('properties')">Name EN</th>
           <th v-if="bankHasData('properties')">Amenity</th>
           <th v-if="bankHasData('properties')">Addr city</th>
@@ -120,12 +120,8 @@
 
           <td>{{ bank.latitude ? bank.latitude : "/" }}</td>
 
-          <td v-if="bankHasData('properties')">
-            {{
-              bank.properties && bank.properties["name"]
-                ? bank.properties["name"]
-                : "/"
-            }}
+          <td>
+            {{ bank.name ? bank.name : "/" }}
           </td>
           <td v-if="bankHasData('properties')">
             {{
@@ -280,8 +276,9 @@ type Bank = {
   openstreetmap_url: string;
   latitude: number;
   longitude: number;
+  name: string;
+
   properties: {
-    name: string;
     amenity: string;
     "addr:city": string;
     "addr:city:en": string;
@@ -349,8 +346,8 @@ function makeMap(update = false) {
     })
       .addTo(mapData.value)
       .bindPopup(
-        bank.properties && bank.properties.name
-          ? bank.properties.name
+        bank.properties && bank.name
+          ? bank.name
           : " " + " " + bank.openstreetmap_url
       );
     markers.value.push(marker);
