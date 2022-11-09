@@ -1,7 +1,5 @@
 # FINKI-DIANS
-<a href="https://dians.ddcode.co/" target="_blank">
-<h3 align="center">Project website</h3>
-</a>
+<h3 align="center">Project website (https://ddcode.co/)</h3>
 
 
 David Atanasoski 201202 <br />
