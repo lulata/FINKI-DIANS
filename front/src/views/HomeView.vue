@@ -1,77 +1,85 @@
 <template>
   <div class="home-page" :class="{ dark: darkMode }">
-    <h1 class="home-page-title">DIANS PROJECT</h1>
-    <p class="home-page-subtitle">Select additional filters</p>
-    <div class="home-page-buttons">
-      <div class="home-page-button" @click="darkMode = !darkMode">
+    <div class="home-page-header">
+      <div class="home-page-title">
+        <h1 class="paragraph-big">DIANS PROJECT</h1>
+        <h4 class="header-4">Select additional filters</h4>
+      </div>
+      <div class="button" @click="darkMode = !darkMode">
         {{ darkMode ? "White" : "Dark" }} mode
       </div>
-      <div
-        class="home-page-button"
-        @click="filterData('withProperties')"
-        :class="{
-          'selected-option': selectedFilters.includes('withProperties'),
-        }"
-      >
-        With Properties
-      </div>
-      <div
-        class="home-page-button"
-        @click="filterData('withEmail')"
-        :class="{
-          'selected-option': selectedFilters.includes('withEmail'),
-        }"
-      >
-        With Email
-      </div>
-      <div
-        class="home-page-button"
-        @click="filterData('withPhone')"
-        :class="{
-          'selected-option': selectedFilters.includes('withPhone'),
-        }"
-      >
-        With Phone
-      </div>
-      <div
-        class="home-page-button"
-        @click="filterData('withAtm')"
-        :class="{
-          'selected-option': selectedFilters.includes('withAtm'),
-        }"
-      >
-        With ATM
-      </div>
-      <div
-        class="home-page-button"
-        @click="filterData('coordinatesOnly')"
-        :class="{
-          'selected-option': selectedFilters.includes('coordinatesOnly'),
-        }"
-      >
-        Coordinates only
-      </div>
+    </div>
 
-      <div
-        class="home-page-button"
-        @click="filterData('sort')"
-        :class="{
-          'selected-option': sort === 'asc' || sort === 'desc',
-        }"
-      >
-        Sort
-        {{
-          sort == "asc" ? ": Ascending" : sort == "desc" ? ": Descending" : ""
-        }}
+    <div class="buttons-container">
+      <div class="top-row">
+        <div
+          class="button"
+          @click="filterData('withProperties')"
+          :class="{
+            'selected-option': selectedFilters.includes('withProperties'),
+          }"
+        >
+          With Properties
+        </div>
+        <div
+          class="button"
+          @click="filterData('withAtm')"
+          :class="{
+            'selected-option': selectedFilters.includes('withAtm'),
+          }"
+        >
+          With ATM
+        </div>
+        <div
+          class="button"
+          @click="filterData('coordinatesOnly')"
+          :class="{
+            'selected-option': selectedFilters.includes('coordinatesOnly'),
+          }"
+        >
+          Coordinates only
+        </div>
+        <div
+          class="button"
+          @click="filterData('withEmail')"
+          :class="{
+            'selected-option': selectedFilters.includes('withEmail'),
+          }"
+        >
+          With Email
+        </div>
+        <div
+          class="button"
+          @click="filterData('withPhone')"
+          :class="{
+            'selected-option': selectedFilters.includes('withPhone'),
+          }"
+        >
+          With Phone
+        </div>
       </div>
-      <div
-        class="home-page-button"
-        @click="filterData('limit')"
-        :class="{
-          'selected-option': selectedFilters.includes('sort'),
-        }"
-      >
-        Limit: {{ limit === 150 ? "All" : limit }}
+      <div class="bottom-row">
+        <div
+          class="button"
+          @click="filterData('sort')"
+          :class="{
+            'selected-option': sort === 'asc' || sort === 'desc',
+          }"
+        >
+          Sort
+          {{
+            sort == "asc" ? ": Ascending" : sort == "desc" ? ": Descending" : ""
+          }}
+        </div>
+        <div
+          class="button"
+          @click="filterData('limit')"
+          :class="{
+            'selected-option': selectedFilters.includes('sort'),
+          }"
+        >
+          Limit: {{ limit === 150 ? "All" : limit }}
+        </div>
       </div>
     </div>
     <div
@@ -80,179 +88,235 @@
       style="width: 100%; height: 500px"
     ></div>
 
-    <h1 class="home-page-title table-title">Table data preview</h1>
+    <h1 class="header-2">Table data preview</h1>
 
-    <table
-      :class="{
-        'selected-properties': selectedFilters.includes('withProperties'),
-      }"
-    >
-      <thead>
-        <tr>
-          <th v-if="bankHasData('name')">Name</th>
-          <th v-if="bankHasData('properties')">Name EN</th>
+    <div class="card-container">
+      <div class="card" v-for="bank in bankData" :key="bank.id">
+        <div class="card-info full-width" v-if="bankHasData('name')">
+          <p class="card-info-title">Name</p>
+          <p class="card-info-value">{{ bank.name ? bank.name : "/" }}</p>
+        </div>
 
-          <th v-if="bankHasData('longitude')">Longitude</th>
-          <th v-if="bankHasData('latitude')">Latitude</th>
-
-          <th v-if="bankHasData('properties')">Amenity</th>
-          <th v-if="bankHasData('properties')">Addr city</th>
-          <th v-if="bankHasData('properties')">Addr city en</th>
-          <th v-if="bankHasData('properties')">Addr country</th>
-          <th v-if="bankHasData('properties')">Addr house number</th>
-          <th v-if="bankHasData('properties')">Addr postcode</th>
-          <th v-if="bankHasData('properties')">Addr street</th>
-          <th v-if="bankHasData('properties')">ATM</th>
-          <th v-if="bankHasData('properties')">Building</th>
-          <th v-if="bankHasData('properties')">Int name</th>
-          <th v-if="bankHasData('properties')">Building lvls</th>
-          <th v-if="bankHasData('properties')">office</th>
-          <th v-if="bankHasData('properties')">Opening hours</th>
-          <th v-if="bankHasData('properties')">Operator</th>
-          <th v-if="bankHasData('properties')">Surveillance</th>
-          <th v-if="bankHasData('properties')">Surveillance type</th>
-          <th v-if="bankHasData('properties')">Contact website</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="bank in bankData" :key="bank.id">
-          <td v-if="bankHasData('name')">
-            {{ bank.name ? bank.name : "/" }}
-          </td>
-          <td v-if="bankHasData('properties')">
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Name En</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["name:en"]
                 ? bank.properties["name:en"]
                 : "/"
             }}
-          </td>
-          <td>{{ bank.longitude ? bank.longitude : "/" }}</td>
+          </p>
+        </div>
 
-          <td>{{ bank.latitude ? bank.latitude : "/" }}</td>
+        <div class="card-info" v-if="bankHasData('longitude')">
+          <p class="card-info-title">Longitude</p>
+          <p class="card-info-value">
+            {{ bank.longitude ? bank.longitude : "/" }}
+          </p>
+        </div>
 
-          <td v-if="bankHasData('properties')">
+        <div class="card-info" v-if="bankHasData('latitude')">
+          <p class="card-info-title">Latitude</p>
+          <p class="card-info-value">
+            {{ bank.latitude ? bank.latitude : "/" }}
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Amenity</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["amenity"]
                 ? bank.properties["amenity"]
                 : "/"
             }}
-          </td>
+          </p>
+        </div>
 
-          <td v-if="bankHasData('properties')">
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Addr city</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["addr:city"]
                 ? bank.properties["addr:city"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Addr city en</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["addr:city:en"]
                 ? bank.properties["addr:city:en"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Addr country</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["addr:country"]
                 ? bank.properties["addr:country"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Addr house number</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["addr:housenumber"]
                 ? bank.properties["addr:housenumber"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Addr postcode</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["addr:postcode"]
                 ? bank.properties["addr:postcode"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Addr street</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["addr:street"]
                 ? bank.properties["addr:street"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">ATM</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["atm"]
                 ? bank.properties["atm"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Building</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["building"]
                 ? bank.properties["building"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Int name</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["int_name"]
                 ? bank.properties["int_name"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Building lvls</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["building:levels"]
                 ? bank.properties["building:levels"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Office</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["office"]
                 ? bank.properties["office"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Opening hours</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["opening_hours"]
                 ? bank.properties["opening_hours"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Operator</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["operator"]
                 ? bank.properties["operator"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Surveillance</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["surveillance"]
                 ? bank.properties["surveillance"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Surveillance type</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["surveillance:type"]
                 ? bank.properties["surveillance:type"]
                 : "/"
             }}
-          </td>
-          <td v-if="bankHasData('properties')">
+          </p>
+        </div>
+
+        <div class="card-info" v-if="bankHasData('properties')">
+          <p class="card-info-title">Contact website</p>
+          <p class="card-info-value">
             {{
               bank.properties && bank.properties["contact:website"]
                 ? bank.properties["contact:website"]
                 : "/"
             }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          </p>
+        </div>
+      </div>
+      <div class="card-fake"></div>
+      <div class="card-fake"></div>
+      <div class="card-fake"></div>
+      <div class="card-fake"></div>
+      <div class="card-fake"></div>
+      <div class="card-fake"></div>
+      <div class="card-fake"></div>
+      <div class="card-fake"></div>
+    </div>
   </div>
 </template>
 

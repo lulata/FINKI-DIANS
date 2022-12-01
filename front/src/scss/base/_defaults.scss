@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap");
+@import "../abstracts/mixins";
+
+#app {
+  @include respond(tablet) {
+  }
+  @include respond(phone) {
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  font-family: "Montserrat", sans-serif;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+html,
+body {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+body {
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+}
