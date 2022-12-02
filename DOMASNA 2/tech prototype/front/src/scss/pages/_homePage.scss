@@ -1,0 +1,141 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 40px;
+  background-color: $whiteColor;
+  row-gap: 20px;
+  &.dark {
+    background-color: $backgroundColor;
+    .paragraph-big,
+    .header-4,
+    .header-2 {
+      color: $whiteColor;
+    }
+    .button {
+      background-color: $whiteColor;
+      color: $backgroundColor;
+      border: 0.1rem solid $backgroundColor;
+      &::before {
+        background-color: $backgroundColor;
+      }
+      &:hover {
+        color: $whiteColor;
+      }
+      &.selected-option {
+        border: 0.1rem solid $primaryColor;
+        color: $primaryColor;
+        &::before {
+          background-color: $primaryColor;
+        }
+        &:hover {
+          color: $whiteColor;
+          &::before {
+            border: 0.1rem solid $primaryColor;
+            transform: scaleX(1);
+            transform-origin: left;
+          }
+        }
+      }
+    }
+  }
+
+  .home-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .home-page-title {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+    }
+  }
+  .buttons-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+    .top-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      gap: 20px;
+    }
+    .bottom-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      width: 100%;
+      gap: 20px;
+    }
+  }
+  #leafletmap {
+    margin: 20px 0;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    .card-fake {
+      width: 320px;
+      flex-grow: 1;
+    }
+    .card {
+      background: $whiteColor;
+      box-shadow: 0px 0px 10px rgba(28, 29, 39, 0.25);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 20px;
+      width: 320px;
+      flex-grow: 1;
+      height: auto;
+      .card-info {
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+        width: calc(100% / 2 - 10px);
+        .card-info-title {
+          color: $darkGreyColor;
+        }
+        &.full-width {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @include respond(tablet) {
+    padding: 20px;
+    #leafletmap {
+      margin: 0;
+    }
+  }
+  @include respond(phone) {
+    .home-page-header {
+      flex-direction: column;
+      align-items: flex-end;
+      row-gap: 20px;
+      .home-page-title {
+        width: 100%;
+      }
+    }
+    .buttons-container {
+      flex-direction: row;
+      .button {
+        max-width: 100%;
+        flex-grow: 1;
+      }
+    }
+  }
+}
