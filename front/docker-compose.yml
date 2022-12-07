@@ -1,30 +1,28 @@
 version: "3.8"
 services:
-  nginx:
+  server:
     restart: unless-stopped
     build: 
-      context: ./front
+      context: .
       dockerfile: Dockerfile
-    container_name: nginx
+    container_name: server
     image: nginx_image
     ports:
        - '8080:80'
     volumes:
-      - ./front:/var/www
+      - .:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d/
       
   frontend:
     restart: always
     build: 
-      context: ./front
+      context: .
       dockerfile: Dockerfile
     container_name: frontend
     image: frontend_image
-    # ports:
-    #   - '8080:8080'
     stdin_open: true
     volumes:
-      - ./front:/app
+      - .:/app
       - /app/node_modules
     # command: npm run serve
     expose:
@@ -34,12 +32,7 @@ services:
       - PORT=8080
       - CHOKIDAR_USEPOLLING=true
     working_dir: /app
-    # networks:
-    #   - frontend
     depends_on:
-      - nginx
+      - server
 
   
-# networks:
-#   frontend:
-#     driver: bridge
