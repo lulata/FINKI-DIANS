@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  server:
+    restart: unless-stopped
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: server
+    image: nginx_image
+    ports:
+       - '8080:80'
+    volumes:
+      - .:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+      
+  frontend:
+    restart: always
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: frontend
+    image: frontend_image
+    stdin_open: true
+    volumes:
+      - .:/app
+      - /app/node_modules
+    # command: npm run serve
+    expose:
+      - "8080"
+    environment:
+      - HOST=localhost
+      - PORT=8080
+      - CHOKIDAR_USEPOLLING=true
+    working_dir: /app
+    depends_on:
+      - server
+
+  
