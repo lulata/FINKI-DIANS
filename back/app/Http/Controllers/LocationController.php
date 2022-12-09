@@ -34,24 +34,6 @@ class LocationController extends Controller
         ->thenReturn()
         ->get()->toArray();
 
-        return response($this->formatData($data), 200);
-    }
-
-
-
-
-    public function formatData($data) {
-        if(!isset($data[0]['properties'])) {
-            return $data;
-        }
-
-        for($i = 0; $i < count($data); $i ++) {
-            $changed = collect($data[$i]['properties']);
-            $data[$i]['properties'] =  $changed->mapWithKeys(function ($item) {
-                return [$item['type'] => $item['data']];
-            });
-        }
-
-        return $data;
+        return response(formatData($data), 200);
     }
 }
