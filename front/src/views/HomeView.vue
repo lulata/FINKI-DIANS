@@ -30,6 +30,7 @@ const darkMode = ref(false);
 const map: any = ref(makeMap());
 
 onMounted(() => {
+  console.error("Stefanija odbi da pija so nas :(")
   console.log(
     "%cStefanija najdobrata demonstratorka!",
     "font-size: 20px; font-weight: bold; color: #fff; background: #000; padding: 5px; border-radius: 8px;margin: 10px;"
