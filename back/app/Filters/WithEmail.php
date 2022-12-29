@@ -15,6 +15,13 @@ class WithEmail
 
         return $next($request)->whereHas('properties', function($q) {
             $q->where([['type', 'email']]);
+        })->with('properties', function($q) {
+
+            if (request()->has('withPhone')) {
+                $q->where([['type', 'email']])->orWhere([['type', 'phone']]);
+            } else {
+                $q->where([['type', 'email']]);
+            }
         });
     }
 }
