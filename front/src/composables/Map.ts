@@ -39,8 +39,8 @@ export function makeMap() {
       const marker = L.marker([bank.longitude, bank.latitude], {
         icon: bankIcon,
       })
-        .addTo(mapData.value)
-        .bindPopup(bank.name ? bank.name : "Name not defined ");
+        // .addTo(mapData.value)
+        // .bindPopup(bank.name ? bank.name : "Name not defined ");
       markers.value.push(marker);
       marker.addTo(mapData.value);
     });

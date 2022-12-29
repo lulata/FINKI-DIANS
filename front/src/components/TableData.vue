@@ -5,17 +5,8 @@
     <div class="card" v-for="bank in store.banks" :key="bank.id">
       <div class="card-info full-width" v-if="checkBankDataProperties('name')">
         <p class="card-info-title">Name</p>
-        <p class="card-info-value">{{ bank.name ? bank.name : "/" }}</p>
-      </div>
-
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Name En</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["name:en"]
-              ? bank.properties["name:en"]
-              : "/"
-          }}
+        <p class="card-info-value" :title="bank.name ? bank.name : '/'">
+          {{ bank.name ? bank.name : "/" }}
         </p>
       </div>
 
@@ -33,191 +24,80 @@
         </p>
       </div>
 
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Amenity</p>
+      <div
+        class="card-info full-width"
+        v-if="
+          checkBankDataProperties('properties') &&
+          store.selectedFilters.includes('withEmail')
+        "
+        :title="
+          bank.properties && bank.properties['email']
+            ? bank.properties['email']
+            : '/'
+        "
+      >
+        <p class="card-info-title">Email</p>
         <p class="card-info-value">
           {{
-            bank.properties && bank.properties["amenity"]
-              ? bank.properties["amenity"]
+            bank.properties && bank.properties["email"]
+              ? bank.properties["email"]
               : "/"
           }}
         </p>
       </div>
 
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Addr city</p>
-        <p class="card-info-value">
+      <div
+        class="card-info full-width"
+        v-if="
+          checkBankDataProperties('properties') &&
+          store.selectedFilters.includes('withPhone')
+        "
+      >
+        <p class="card-info-title">Phone</p>
+        <p
+          class="card-info-value"
+          :title="
+            bank.properties && bank.properties['phone']
+              ? bank.properties['phone']
+              : '/'
+          "
+        >
           {{
-            bank.properties && bank.properties["addr:city"]
-              ? bank.properties["addr:city"]
+            bank.properties && bank.properties["phone"]
+              ? bank.properties["phone"]
               : "/"
           }}
         </p>
       </div>
 
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Addr city en</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["addr:city:en"]
-              ? bank.properties["addr:city:en"]
-              : "/"
-          }}
-        </p>
-      </div>
-
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Addr country</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["addr:country"]
-              ? bank.properties["addr:country"]
-              : "/"
-          }}
-        </p>
-      </div>
-
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Addr house number</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["addr:housenumber"]
-              ? bank.properties["addr:housenumber"]
-              : "/"
-          }}
-        </p>
-      </div>
-
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Addr postcode</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["addr:postcode"]
-              ? bank.properties["addr:postcode"]
-              : "/"
-          }}
-        </p>
-      </div>
-
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Addr street</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["addr:street"]
-              ? bank.properties["addr:street"]
-              : "/"
-          }}
-        </p>
-      </div>
-
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">ATM</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["atm"]
-              ? bank.properties["atm"]
-              : "/"
-          }}
-        </p>
-      </div>
-
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Building</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["building"]
-              ? bank.properties["building"]
-              : "/"
-          }}
-        </p>
-      </div>
-
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Int name</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["int_name"]
-              ? bank.properties["int_name"]
-              : "/"
-          }}
-        </p>
-      </div>
-
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Building lvls</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["building:levels"]
-              ? bank.properties["building:levels"]
-              : "/"
-          }}
-        </p>
-      </div>
-
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Office</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["office"]
-              ? bank.properties["office"]
-              : "/"
-          }}
-        </p>
-      </div>
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Opening hours</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["opening_hours"]
-              ? bank.properties["opening_hours"]
-              : "/"
-          }}
-        </p>
-      </div>
-
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Operator</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["operator"]
-              ? bank.properties["operator"]
-              : "/"
-          }}
-        </p>
-      </div>
-
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Surveillance</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["surveillance"]
-              ? bank.properties["surveillance"]
-              : "/"
-          }}
-        </p>
-      </div>
-
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Surveillance type</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["surveillance:type"]
-              ? bank.properties["surveillance:type"]
-              : "/"
-          }}
-        </p>
-      </div>
-
-      <div class="card-info" v-if="checkBankDataProperties('properties')">
-        <p class="card-info-title">Contact website</p>
-        <p class="card-info-value">
-          {{
-            bank.properties && bank.properties["contact:website"]
-              ? bank.properties["contact:website"]
-              : "/"
-          }}
-        </p>
-      </div>
+      <template
+        v-if="
+          checkBankDataProperties('properties') &&
+          store.selectedFilters.includes('withProperties')
+        "
+      >
+        <div
+          class="card-info"
+          v-for="(bankProp, index) in bankProperties"
+          :key="index"
+        >
+          <p class="card-info-title">{{ bankProp.name }}</p>
+          <p
+            class="card-info-value"
+            :title="
+              bank.properties && bank.properties[bankProp.value]
+                ? bank.properties[bankProp.value]
+                : '/'
+            "
+          >
+            {{
+              bank.properties && bank.properties[bankProp.value]
+                ? bank.properties[bankProp.value]
+                : "/"
+            }}
+          </p>
+        </div>
+      </template>
     </div>
     <div class="card-fake"></div>
     <div class="card-fake"></div>
@@ -230,8 +110,90 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { Bank } from "@/types";
+import { Bank, BankProperties } from "@/types";
 import { generalStore } from "@/store/generalStore";
+import { ref } from "vue";
+
+const bankProperties = ref<
+  {
+    name: string;
+    value: keyof BankProperties;
+  }[]
+>([
+  {
+    name: "Name en",
+    value: "name:en",
+  },
+  {
+    name: "Amenity",
+    value: "amenity",
+  },
+  {
+    name: "Addr city",
+    value: "addr:city",
+  },
+  {
+    name: "Addr city en",
+    value: "addr:city:en",
+  },
+  {
+    name: "Addr country",
+    value: "addr:country",
+  },
+  {
+    name: "Addr housenumber",
+    value: "addr:housenumber",
+  },
+  {
+    name: "Addr postcode",
+    value: "addr:postcode",
+  },
+  {
+    name: "Addr street",
+    value: "addr:street",
+  },
+  {
+    name: "ATM",
+    value: "atm",
+  },
+  {
+    name: "Building",
+    value: "building",
+  },
+  {
+    name: "Building levels",
+    value: "building:levels",
+  },
+  {
+    name: "Int name",
+    value: "int_name",
+  },
+
+  {
+    name: "Office",
+    value: "office",
+  },
+  {
+    name: "Opening hours",
+    value: "opening_hours",
+  },
+  {
+    name: "Operator",
+    value: "operator",
+  },
+  {
+    name: "Surveillance",
+    value: "surveillance",
+  },
+  {
+    name: "Surveillance type",
+    value: "surveillance:type",
+  },
+  {
+    name: "Contact website",
+    value: "contact:website",
+  },
+]);
 
 const store = generalStore();
 function checkBankDataProperties(bankCheck: string) {

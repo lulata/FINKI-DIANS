@@ -1,51 +1,70 @@
 <template>
   <div class="buttons-container">
     <div class="top-row">
-      <div
+      <button
         class="button"
         @click="applyFilters('withProperties')"
         :class="{
           'selected-option': store.selectedFilters.includes('withProperties'),
+          'disabled-option': store.selectedFilters.includes('coordinatesOnly'),
         }"
+        :disabled="store.selectedFilters.includes('coordinatesOnly')"
       >
         With Properties
-      </div>
-      <div
+      </button>
+      <button
         class="button"
         @click="applyFilters('withAtm')"
         :class="{
           'selected-option': store.selectedFilters.includes('withAtm'),
+          'disabled-option': store.selectedFilters.includes('coordinatesOnly'),
         }"
+        :disabled="store.selectedFilters.includes('coordinatesOnly')"
       >
         With ATM
-      </div>
-      <div
+      </button>
+      <button
         class="button"
         @click="applyFilters('coordinatesOnly')"
         :class="{
           'selected-option': store.selectedFilters.includes('coordinatesOnly'),
+          'disabled-option':
+            store.selectedFilters.includes('withEmail') ||
+            store.selectedFilters.includes('withPhone') ||
+            store.selectedFilters.includes('withProperties') ||
+            store.selectedFilters.includes('withAtm'),
         }"
+        :disabled="
+          store.selectedFilters.includes('withEmail') ||
+          store.selectedFilters.includes('withPhone') ||
+          store.selectedFilters.includes('withProperties') ||
+          store.selectedFilters.includes('withAtm')
+        "
       >
         Coordinates only
-      </div>
-      <div
+      </button>
+      <button
         class="button"
         @click="applyFilters('withEmail')"
         :class="{
           'selected-option': store.selectedFilters.includes('withEmail'),
+          'disabled-option': store.selectedFilters.includes('coordinatesOnly'),
         }"
+        :disabled="store.selectedFilters.includes('coordinatesOnly')"
       >
         With Email
-      </div>
-      <div
+      </button>
+      <button
         class="button"
         @click="applyFilters('withPhone')"
         :class="{
           'selected-option': store.selectedFilters.includes('withPhone'),
+          'disabled-option': store.selectedFilters.includes('coordinatesOnly'),
         }"
+        :disabled="store.selectedFilters.includes('coordinatesOnly')"
       >
         With Phone
-      </div>
+      </button>
     </div>
     <div class="bottom-row">
       <div

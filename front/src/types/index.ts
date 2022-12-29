@@ -7,7 +7,7 @@ export type Bank = {
   properties: BankProperties;
 };
 
-type BankProperties = {
+export type BankProperties = {
   amenity: string;
   "addr:city": string;
   "addr:city:en": string;
@@ -26,4 +26,6 @@ type BankProperties = {
   surveillance: string;
   "surveillance:type": string;
   "contact:website": string;
+  email: string;
+  phone: string;
 };

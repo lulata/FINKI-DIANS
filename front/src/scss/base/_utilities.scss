@@ -122,4 +122,21 @@ ul {
       }
     }
   }
+
+  &.disabled-option {
+    border: 0.1rem solid $darkGreyColor;
+    color: $darkGreyColor;
+    &::before {
+      background-color: $darkGreyColor;
+    }
+    &:hover {
+      color: $whiteColor;
+      cursor: not-allowed;
+      &::before {
+        border: 0.1rem solid $darkGreyColor;
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+  }
 }
