@@ -1,0 +1,89 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 40px;
+  background-color: $whiteColor;
+  row-gap: 20px;
+  &.dark {
+    background-color: $backgroundColor;
+    .paragraph-big,
+    .header-4,
+    .header-2 {
+      color: $whiteColor;
+    }
+    .button {
+      background-color: $whiteColor;
+      color: $backgroundColor;
+      border: 0.1rem solid $backgroundColor;
+      &::before {
+        background-color: $backgroundColor;
+      }
+      &:hover {
+        color: $whiteColor;
+      }
+      &.selected-option {
+        border: 0.1rem solid $primaryColor;
+        color: $primaryColor;
+        &::before {
+          background-color: $primaryColor;
+        }
+        &:hover {
+          color: $whiteColor;
+          &::before {
+            border: 0.1rem solid $primaryColor;
+            transform: scaleX(1);
+            transform-origin: left;
+          }
+        }
+      }
+      &.disabled-option {
+        border: 0.1rem solid $darkGreyColor;
+        color: $darkGreyColor;
+        &::before {
+          background-color: $darkGreyColor;
+        }
+        &:hover {
+          color: $whiteColor;
+          &::before {
+            border: 0.1rem solid $darkGreyColor;
+            transform: scaleX(1);
+            transform-origin: left;
+          }
+        }
+      }
+    }
+  }
+
+  .home-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .home-page-title {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+    }
+  }
+
+  #leafletmap {
+    margin: 20px 0;
+  }
+
+  @include respond(tablet) {
+    padding: 20px;
+    #leafletmap {
+      margin: 0;
+    }
+  }
+  @include respond(phone) {
+    .home-page-header {
+      flex-direction: column;
+      align-items: flex-end;
+      row-gap: 20px;
+      .home-page-title {
+        width: 100%;
+      }
+    }
+  }
+}

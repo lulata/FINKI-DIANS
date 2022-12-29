@@ -1,0 +1,142 @@
+h1,
+.header-1 {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 100%;
+}
+
+h2,
+.header-2 {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 100%;
+}
+
+h3,
+.header-3 {
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 100%;
+}
+
+h4,
+.header-4 {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 130%;
+}
+
+h5,
+.header-5 {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 130%;
+}
+
+h6,
+.header-6 {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+}
+
+p,
+a,
+label,
+li {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+}
+.paragraph-big {
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 100%;
+}
+
+.paragraph-small {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 130%;
+}
+
+ul {
+  list-style: none;
+}
+
+.button {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.65rem 1.5rem;
+  gap: 1rem;
+  border: 0.1rem solid $backgroundColor;
+  border-radius: 0.4rem;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  color: $backgroundColor;
+  outline: none;
+  background-color: transparent;
+  z-index: 2;
+  transition: color 0.2s ease-in-out;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $backgroundColor;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.2s ease-in-out;
+  }
+  &:hover {
+    cursor: pointer;
+    color: $whiteColor;
+    &::before {
+      border: 0.1rem solid $backgroundColor;
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+
+  &.selected-option {
+    border: 0.1rem solid $primaryColor;
+    color: $primaryColor;
+    &::before {
+      background-color: $primaryColor;
+    }
+    &:hover {
+      color: $whiteColor;
+      &::before {
+        border: 0.1rem solid $primaryColor;
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+  }
+
+  &.disabled-option {
+    border: 0.1rem solid $darkGreyColor;
+    color: $darkGreyColor;
+    &::before {
+      background-color: $darkGreyColor;
+    }
+    &:hover {
+      color: $whiteColor;
+      cursor: not-allowed;
+      &::before {
+        border: 0.1rem solid $darkGreyColor;
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+  }
+}

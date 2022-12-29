@@ -1,0 +1,32 @@
+.buttons-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+  .top-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+  }
+  .bottom-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 20px;
+  }
+}
+@include respond(phone) {
+  .buttons-container {
+    flex-direction: row;
+    .button {
+      max-width: 100%;
+      flex-grow: 1;
+    }
+  }
+}
